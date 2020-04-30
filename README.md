@@ -1,3 +1,8 @@
+
+![Generic badge](https://img.shields.io/badge/Version-0.1.0-green.svg)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kaito002/react-microfrontend-container-ts/graphs/commit-activity)
+
+
 # React MicroFrontend Container
 
 This project is a template to create a **main-container** that could manage all micro frontend sections
@@ -50,7 +55,7 @@ This component expect 3 paramaters:
 
 * **name:** it will represent the section in the DOM, also this name **MUST** match with the name given in the micro-section.
 
-* **host:** this will be the base url to get the <code>asset-manifes.json</code> file in the micro-section.
+* **host:** this will be the base url to get the <code>asset-manifest.json</code> file in the micro-section.
 
 * **renderMethodName:** Every micro-section has a renderMethod, makes sure that renderName is nor repeated in other sections. Using this method the container can manage the render of the section without requesting again to the section server.
 

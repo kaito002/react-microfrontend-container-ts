@@ -43,7 +43,7 @@ function App() {
   return (
     <div>
       <h2>Load Section</h2>
-      <MicroFrontend name="MicroSection" host="http://127.0.0.1:7000" renderMethodName="renderMFSection"/>
+      <MicroFrontend name="MicroSection" host="http://127.0.0.1:7000" renderMethodName="renderMicroSection"/>
     </div>
   );
 }

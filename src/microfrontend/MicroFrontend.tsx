@@ -8,22 +8,37 @@ type MicroFrontendType = {
   renderMethodName: string
 }
 
+const isJsFile = filepath => filepath.endsWith(".js");
+
+const isCssFile = filepath => filepath.endsWith(".css");
+
+const removeContainerHost = (url) => {
+  return url
+    .replace(window.location.origin, "")
+}
+
+const nodesToArray = (nodes: HTMLCollection) => Array.prototype.slice.call(nodes)
+
 const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => { 
 
   const containerId = `${name}-container`;
   
   const [loadingError, setLoadingError] = useState(false)
 
-  const isJsFile = filepath => filepath.endsWith(".js")
-
-  const isCssFile = filepath => filepath.endsWith(".css")
-
   const loadJsFile = (filepath, id) => {
     const script = document.createElement("script");
     
     script.id = id;
     script.src = `${host}/${filepath}`;
-    
+    script.onload = () => {
+      const mediaElements = [...nodesToArray(document.getElementsByTagName("img")), 
+        ...nodesToArray(document.getElementsByTagName("video")), 
+        ...nodesToArray(document.getElementsByTagName("audio"))];
+
+      mediaElements.forEach(element => {
+        element.src = `${host}${removeContainerHost(element.src)}`
+      });
+    }
     document.getElementById(containerId)?.appendChild(script);
   }
 

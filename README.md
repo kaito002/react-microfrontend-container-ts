@@ -59,6 +59,11 @@ This component expect 3 paramaters:
 
 * **renderMethodName:** Every micro-section has a renderMethod, makes sure that renderName is nor repeated in other sections. Using this method the container can manage the render of the section without requesting again to the section server.
 
+## Run the DEMO
+
+* First you must to download the <code>section</code> micro frontend in this [link](https://github.com/kaito002/react-microfrontend-section-ts)
+
+* With both project downloaded, you just need to write <code>npm install</code> and <code>npm start</code>, recomendation, do it first in the micro-section and then in this project.
 
 ## Considerations
 

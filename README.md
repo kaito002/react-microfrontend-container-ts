@@ -73,9 +73,6 @@ The communication between sections (container & micro-sections) it's across **ht
 
 ## Future Work
 
-* Support Environment Files
-* Support Server Side Rendering (standalone & micro-frontend version)
-* Add React Router and manage sections
 * Add Redux to manage states
 * Use <code>Tailwindcss</code> as Css Framework
 * Support Another WebApp entries, like <code>Angular</code> & <code>Vue</code>

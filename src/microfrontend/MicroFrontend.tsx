@@ -25,20 +25,25 @@ const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => {
   
   const [loadingError, setLoadingError] = useState(false)
 
+  const mediaFixer = () => {
+    const container = document.getElementById(containerId)!;
+    const mediaElements = [...nodesToArray(container.getElementsByTagName("img")), 
+      ...nodesToArray(container.getElementsByTagName("video")), 
+      ...nodesToArray(container.getElementsByTagName("audio"))];
+
+    mediaElements.forEach(element => {
+      if (!element.src.startsWith(host))
+        element.src = `${host}${removeContainerHost(element.src)}`
+    });
+  }
+
   const loadJsFile = (filepath, id) => {
     const script = document.createElement("script");
     
     script.id = id;
     script.src = `${host}/${filepath}`;
-    script.onload = () => {
-      const mediaElements = [...nodesToArray(document.getElementsByTagName("img")), 
-        ...nodesToArray(document.getElementsByTagName("video")), 
-        ...nodesToArray(document.getElementsByTagName("audio"))];
+    script.onload = mediaFixer;
 
-      mediaElements.forEach(element => {
-        element.src = `${host}${removeContainerHost(element.src)}`
-      });
-    }
     document.getElementById(containerId)?.appendChild(script);
   }
 
@@ -60,9 +65,10 @@ const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => {
       const file = files[i];
       const id = `${name}-${file}`;
 
-      if (document.getElementById(id)) {
+      if (document.getElementById(id)) {        
         if (file.includes("main")) {
           window[renderMethodName](containerId)
+          mediaFixer()
         }
         continue;
       }
@@ -77,7 +83,7 @@ const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => {    
     fromFetch(`${host}/asset-manifest.json`)
       .pipe(
         flatMap(onRequestManifest),
@@ -88,7 +94,7 @@ const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => {
         console.log(`Error Getting ${name} frontend: `, error)
       })
       
-  }, [])
+  })
 
   if (loadingError) {
     return <div>An error produced loading {name} micro frontend</div>

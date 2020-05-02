@@ -1,11 +1,23 @@
 import React from 'react';
-import MicroFrontend from './microfrontend/MicroFrontend';
+import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+import HomeView from './views/HomeView';
+import MicroSectionView from './views/MicroSectionView';
 
 function App() {
   return (
     <div>
-      <h2>Load Section</h2>
-      <MicroFrontend name="MicroSection" host="http://127.0.0.1:7000" renderMethodName="renderMicroSection"/>
+      <BrowserRouter>
+        <div>
+          <ol>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/micro-section">Micro Section</NavLink></li>
+          </ol>
+        </div>
+        <Switch>
+          <Route path="/micro-section"component={MicroSectionView} />
+          <Route path="/" component={HomeView}/>            
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

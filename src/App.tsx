@@ -10,11 +10,11 @@ function App() {
         <div>
           <ol>
             <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/micro-section">Micro Section</NavLink></li>
+            <li><NavLink to="/micro-section/10">Micro Section</NavLink></li>
           </ol>
         </div>
         <Switch>
-          <Route path="/micro-section"component={MicroSectionView} />
+          <Route path="/micro-section/:id"component={MicroSectionView} />
           <Route path="/" component={HomeView}/>            
         </Switch>
       </BrowserRouter>

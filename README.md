@@ -1,5 +1,5 @@
 
-![Generic badge](https://img.shields.io/badge/Version-0.2.1-green.svg)
+![Generic badge](https://img.shields.io/badge/Version-0.2.2-green.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kaito002/react-microfrontend-container-ts/graphs/commit-activity)
 
 
@@ -73,7 +73,7 @@ The communication between sections (container & micro-sections) it's across **ht
 
 ## Future Work
 
-* Add Redux to manage states
+* Add a state management like Redux, MobX, Flux
 * Use <code>Tailwindcss</code> as Css Framework
 * Support Another WebApp entries, like <code>Angular</code> & <code>Vue</code>
 

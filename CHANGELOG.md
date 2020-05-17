@@ -1,3 +1,6 @@
+# 0.2.2
+* Add server side call
+
 # 0.2.1
 * Change Demo to use router with params
 

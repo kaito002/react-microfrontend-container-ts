@@ -22,11 +22,12 @@ const nodesToArray = (nodes: HTMLCollection) => Array.prototype.slice.call(nodes
 const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => { 
 
   const containerId = `${name}-container`;
+  const containerLibsId = `${name}-libs-container`;
   
   const [loadingError, setLoadingError] = useState(false)
 
   const mediaFixer = () => {
-    const container = document.getElementById(containerId)!;
+    const container = document.getElementById(containerLibsId)!;
     const mediaElements = [...nodesToArray(container.getElementsByTagName("img")), 
       ...nodesToArray(container.getElementsByTagName("video")), 
       ...nodesToArray(container.getElementsByTagName("audio"))];
@@ -39,21 +40,25 @@ const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => {
 
   const loadJsFile = (filepath, id) => {
     const script = document.createElement("script");
-    
+
     script.id = id;
     script.src = `${host}/${filepath}`;
+    script.crossOrigin = '';
+    script.async = true;
     script.onload = mediaFixer;
-
-    document.getElementById(containerId)?.appendChild(script);
+    document.getElementById(containerLibsId)?.insertBefore(script, document.getElementById(containerId));
   }
 
   const loadCssFile = (filepath, id) => {
     const link = document.createElement("link")
 
     link.id = id;
+    link.rel = "stylesheet";
+    link.type = "text/css";
     link.href = `${host}/${filepath}`;
-
-    document.getElementById(containerId)?.appendChild(link)
+    link.crossOrigin = '';
+    link.onload = mediaFixer;
+    document.getElementById(containerLibsId)?.insertBefore(link, document.getElementById(containerId))
   }
 
   const onRequestManifest = (response: any) => response.json()
@@ -64,7 +69,6 @@ const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const id = `${name}-${file}`;
-
       if (document.getElementById(id)) {        
         if (file.includes("main")) {
           window[renderMethodName](containerId)
@@ -93,14 +97,17 @@ const MicroFrontend = ({ host, name, renderMethodName }: MicroFrontendType) => {
         setLoadingError(true);
         console.log(`Error Getting ${name} frontend: `, error)
       })
-      
-  })
+  }, [])
 
   if (loadingError) {
     return <div>An error produced loading {name} micro frontend</div>
   }
 
-  return <main id={containerId}></main>
+  return (
+    <main id={containerLibsId}>
+      <section id={containerId}></section>
+    </main>
+  )
 }
 
 export default MicroFrontend;

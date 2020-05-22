@@ -13,7 +13,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 app.use(Express.static(path.resolve(__dirname, "..", "build")));
 
 app.use("/", (_, res) => {
-    fs.readFile(path.resolve("..", "build/index.html"), 'utf8', (err, data) => {
+    fs.readFile(path.resolve(__dirname, "..", "build", "index.html"), 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({
                 error: {

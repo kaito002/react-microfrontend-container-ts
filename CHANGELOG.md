@@ -1,3 +1,7 @@
+# 0.3.0
+* Add Tailwind Css
+* Fix Server build
+
 # 0.2.3
 * Fix CSS Load files
 

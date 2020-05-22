@@ -1,5 +1,5 @@
 
-![Generic badge](https://img.shields.io/badge/Version-0.2.3-green.svg)
+![Generic badge](https://img.shields.io/badge/Version-0.3.0-green.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kaito002/react-microfrontend-container-ts/graphs/commit-activity)
 
 

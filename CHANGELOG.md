@@ -1,3 +1,6 @@
+# 0.2.3
+* Fix CSS Load files
+
 # 0.2.2
 * Add server side call
 

@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
        <Header />
         <Switch>
-          <Route path="/micro-section/:id"component={MicroSectionView} />
+          <Route path="/micro-section" component={MicroSectionView} />
           <Route path="/" component={HomeView}/>            
         </Switch>
       </BrowserRouter>

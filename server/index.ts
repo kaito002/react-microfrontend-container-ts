@@ -24,7 +24,7 @@ app.use("/", (_, res) => {
         
         return res.send(data)
     })
-})
+});
 
 const onServerStarted = () => {
     console.log(`Server is running on ::${PORT}`);
